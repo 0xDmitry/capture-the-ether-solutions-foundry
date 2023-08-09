@@ -1,66 +1,36 @@
-## Foundry
+# Capture the Ether CTF - Foundry edition
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## What is Capture the Ether
 
-Foundry consists of:
+[Capture the Ether](https://capturetheether.com/) is a game in which you hack Ethereum smart contracts to learn about security.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+It's meant to be both fun and educational.
 
-## Documentation
+This game is brought to you by [@smarx](https://twitter.com/smarx), who blogs about smart contract development at [Program the Blockchain](https://programtheblockchain.com/).
 
-https://book.getfoundry.sh/
+## Acknowledgements
 
-## Usage
+- Created by [@smarx](https://twitter.com/smarx)
+- [Capture the Ether Website](https://capturetheether.com/)
+- [Foundry](https://github.com/foundry-rs/foundry)
+- [Foundry Book](https://github.com/foundry-rs/book)
 
-### Build
+## How to play
 
-```shell
-$ forge build
+### Install dependencies
+
+```bash
+forge install
 ```
 
-### Test
+### Compile contracts
 
-```shell
-$ forge test
+```bash
+forge build
 ```
 
-### Format
+### Check solutions
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+```bash
+forge test
 ```

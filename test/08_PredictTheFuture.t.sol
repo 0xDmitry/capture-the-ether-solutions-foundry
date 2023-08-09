@@ -15,8 +15,8 @@ contract PredictTheFutureTest is Test {
 
     function test() public {
         PredictTheFutureAttack attacker = new PredictTheFutureAttack();
-        attacker.lockInGuess{ value: 1 ether }(challenge);
 
+        attacker.lockInGuess{ value: 1 ether }(challenge);
         vm.roll(block.number + 2);
 
         bool success = false;
