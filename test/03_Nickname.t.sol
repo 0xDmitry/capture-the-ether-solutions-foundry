@@ -3,20 +3,19 @@ pragma solidity ^0.6.2;
 pragma experimental ABIEncoderV2;
 
 import { Test } from "forge-std/Test.sol";
-import { CaptureTheEther, NicknameChallenge } from "../src/challenges/03_Nickname/NicknameChallenge.sol";
+import { NicknameChallenge } from "../src/challenges/03_Nickname/NicknameChallenge.sol";
+import { NicknameChallengeFactory } from "../src/challenges/03_Nickname/NicknameChallengeFactory.sol";
 
 contract NicknameTest is Test {
-    CaptureTheEther public captureTheEther;
     NicknameChallenge public challenge;
 
     function setUp() public {
-        captureTheEther = new CaptureTheEther();
-        captureTheEther.createNicknameChallenge();
-        challenge = captureTheEther.nicknameChallenge();
+        NicknameChallengeFactory factory = new NicknameChallengeFactory();
+        challenge = factory.createChallenge(address(this));
     }
 
     function test() public {
-        captureTheEther.setNickname("abc");
+        challenge.cte().setNickname("abc");
 
         assertTrue(challenge.isComplete());
     }

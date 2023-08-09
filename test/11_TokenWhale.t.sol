@@ -4,13 +4,15 @@ pragma experimental ABIEncoderV2;
 
 import { Test } from "forge-std/Test.sol";
 import { TokenWhaleChallenge } from "../src/challenges/11_TokenWhale/TokenWhaleChallenge.sol";
+import { TokenWhaleChallengeFactory } from "../src/challenges/11_TokenWhale/TokenWhaleChallengeFactory.sol";
 import { TokenWhaleAttack } from "../src/attacks/TokenWhaleAttack.sol";
 
 contract TokenWhaleTest is Test {
     TokenWhaleChallenge public challenge;
 
     function setUp() public {
-        challenge = new TokenWhaleChallenge(address(this));
+        TokenWhaleChallengeFactory factory = new TokenWhaleChallengeFactory();
+        challenge = factory.createChallenge(address(this));
     }
 
     function test() public {

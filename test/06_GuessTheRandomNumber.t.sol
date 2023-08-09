@@ -4,6 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import { Test } from "forge-std/Test.sol";
 import { GuessTheRandomNumberChallenge } from "../src/challenges/06_GuessTheRandomNumber/GuessTheRandomNumberChallenge.sol";
+import { GuessTheRandomNumberChallengeFactory } from "../src/challenges/06_GuessTheRandomNumber/GuessTheRandomNumberChallengeFactory.sol";
 import { GuessTheRandomNumberAttack } from "../src/attacks/GuessTheRandomNumberAttack.sol";
 
 contract GuessTheRandomNumberTest is Test {
@@ -12,7 +13,8 @@ contract GuessTheRandomNumberTest is Test {
     uint256 public blockTimestamp;
 
     function setUp() public {
-        challenge = new GuessTheRandomNumberChallenge{ value: 1 ether }();
+        GuessTheRandomNumberChallengeFactory factory = new GuessTheRandomNumberChallengeFactory();
+        challenge = factory.createChallenge{ value: 1 ether }();
         blockNumber = block.number;
         blockTimestamp = block.timestamp;
     }

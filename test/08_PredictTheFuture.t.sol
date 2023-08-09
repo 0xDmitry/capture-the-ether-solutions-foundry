@@ -4,13 +4,15 @@ pragma experimental ABIEncoderV2;
 
 import { Test } from "forge-std/Test.sol";
 import { PredictTheFutureChallenge } from "../src/challenges/08_PredictTheFuture/PredictTheFutureChallenge.sol";
+import { PredictTheFutureChallengeFactory } from "../src/challenges/08_PredictTheFuture/PredictTheFutureChallengeFactory.sol";
 import { PredictTheFutureAttack } from "../src/attacks/PredictTheFutureAttack.sol";
 
 contract PredictTheFutureTest is Test {
     PredictTheFutureChallenge public challenge;
 
     function setUp() public {
-        challenge = new PredictTheFutureChallenge{ value: 1 ether }();
+        PredictTheFutureChallengeFactory factory = new PredictTheFutureChallengeFactory();
+        challenge = factory.createChallenge{ value: 1 ether }();
     }
 
     function test() public {

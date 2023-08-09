@@ -4,13 +4,15 @@ pragma experimental ABIEncoderV2;
 
 import { Test } from "forge-std/Test.sol";
 import { GuessTheNumberChallenge } from "../src/challenges/04_GuessTheNumber/GuessTheNumberChallenge.sol";
+import { GuessTheNumberChallengeFactory } from "../src/challenges/04_GuessTheNumber/GuessTheNumberChallengeFactory.sol";
 import { GuessTheNumberAttack } from "../src/attacks/GuessTheNumberAttack.sol";
 
 contract GuessTheNumberTest is Test {
     GuessTheNumberChallenge public challenge;
 
     function setUp() public {
-        challenge = new GuessTheNumberChallenge{ value: 1 ether }();
+        GuessTheNumberChallengeFactory factory = new GuessTheNumberChallengeFactory();
+        challenge = factory.createChallenge{ value: 1 ether }();
     }
 
     function test() public {

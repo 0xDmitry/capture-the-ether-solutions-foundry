@@ -4,13 +4,15 @@ pragma experimental ABIEncoderV2;
 
 import { Test } from "forge-std/Test.sol";
 import { GuessTheNewNumberChallenge } from "../src/challenges/07_GuessTheNewNumber/GuessTheNewNumberChallenge.sol";
+import { GuessTheNewNumberChallengeFactory } from "../src/challenges/07_GuessTheNewNumber/GuessTheNewNumberChallengeFactory.sol";
 import { GuessTheNewNumberAttack } from "../src/attacks/GuessTheNewNumberAttack.sol";
 
 contract GuessTheNewNumberTest is Test {
     GuessTheNewNumberChallenge public challenge;
 
     function setUp() public {
-        challenge = new GuessTheNewNumberChallenge{ value: 1 ether }();
+        GuessTheNewNumberChallengeFactory factory = new GuessTheNewNumberChallengeFactory();
+        challenge = factory.createChallenge{ value: 1 ether }();
     }
 
     function test() public {

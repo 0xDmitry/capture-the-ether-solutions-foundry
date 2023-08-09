@@ -11,15 +11,15 @@ contract CaptureTheEther {
         nicknameOf[msg.sender] = nickname;
     }
 
-    function createNicknameChallenge() public {
-        nicknameChallenge = new NicknameChallenge(msg.sender);
+    function createNicknameChallenge(address player) public {
+        nicknameChallenge = new NicknameChallenge(player);
     }
 }
 
 // Challenge contract. You don't need to do anything with this; it just verifies
 // that you set a nickname for yourself.
 contract NicknameChallenge {
-    CaptureTheEther cte = CaptureTheEther(msg.sender);
+    CaptureTheEther public cte = CaptureTheEther(msg.sender);
     address player;
 
     // Your address gets passed in as a constructor parameter.
