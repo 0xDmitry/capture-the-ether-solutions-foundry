@@ -5,7 +5,6 @@ pragma experimental ABIEncoderV2;
 import { Test } from "forge-std/Test.sol";
 import { GuessTheSecretNumberChallenge } from "../src/challenges/05_GuessTheSecretNumber/GuessTheSecretNumberChallenge.sol";
 import { GuessTheSecretNumberChallengeFactory } from "../src/challenges/05_GuessTheSecretNumber/GuessTheSecretNumberChallengeFactory.sol";
-import { GuessTheSecretNumberAttack } from "../src/attacks/GuessTheSecretNumberAttack.sol";
 
 contract GuessTheSecretNumberTest is Test {
     GuessTheSecretNumberChallenge public challenge;
@@ -16,9 +15,18 @@ contract GuessTheSecretNumberTest is Test {
     }
 
     function test() public {
-        GuessTheSecretNumberAttack attacker = new GuessTheSecretNumberAttack();
-        attacker.attack{ value: 1 ether }(challenge);
+        for (uint8 i; i < 256; i++) {
+            if (
+                keccak256(abi.encodePacked(i)) ==
+                0xdb81b4d58595fbbbb592d3661a34cdca14d7ab379441400cbfa1b78bc447c365
+            ) {
+                challenge.guess{ value: 1 ether }(i);
+                break;
+            }
+        }
 
         assertTrue(challenge.isComplete());
     }
+
+    receive() external payable {}
 }

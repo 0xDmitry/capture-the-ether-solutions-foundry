@@ -5,7 +5,6 @@ pragma experimental ABIEncoderV2;
 import { Test } from "forge-std/Test.sol";
 import { GuessTheNumberChallenge } from "../src/challenges/04_GuessTheNumber/GuessTheNumberChallenge.sol";
 import { GuessTheNumberChallengeFactory } from "../src/challenges/04_GuessTheNumber/GuessTheNumberChallengeFactory.sol";
-import { GuessTheNumberAttack } from "../src/attacks/GuessTheNumberAttack.sol";
 
 contract GuessTheNumberTest is Test {
     GuessTheNumberChallenge public challenge;
@@ -16,9 +15,10 @@ contract GuessTheNumberTest is Test {
     }
 
     function test() public {
-        GuessTheNumberAttack attacker = new GuessTheNumberAttack();
-        attacker.attack{ value: 1 ether }(challenge);
+        challenge.guess{ value: 1 ether }(42);
 
         assertTrue(challenge.isComplete());
     }
+
+    receive() external payable {}
 }
