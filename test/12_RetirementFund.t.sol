@@ -18,7 +18,7 @@ contract RetirementFundChallengeTest is Test {
 
     function test() public {
         RetirementFundAttack attacker = new RetirementFundAttack();
-        attacker.attack{ value: 1 }(payable(address(challenge)));
+        attacker.destroy{ value: 1 }(payable(address(challenge)));
         challenge.collectPenalty();
 
         assertTrue(challenge.isComplete());
