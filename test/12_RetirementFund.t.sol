@@ -5,10 +5,9 @@ pragma experimental ABIEncoderV2;
 import { Test } from "forge-std/Test.sol";
 import { RetirementFundChallenge } from "../src/challenges/12_RetirementFund/RetirementFundChallenge.sol";
 import { RetirementFundChallengeFactory } from "../src/challenges/12_RetirementFund/RetirementFundChallengeFactory.sol";
-
 import { RetirementFundAttack } from "../src/attacks/RetirementFundAttack.sol";
 
-contract RetirementFundChallengeTest is Test {
+contract RetirementFundTest is Test {
     RetirementFundChallenge public challenge;
 
     function setUp() public {
