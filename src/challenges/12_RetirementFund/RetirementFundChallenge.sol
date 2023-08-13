@@ -1,15 +1,12 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.4.21;
 
 contract RetirementFundChallenge {
     uint256 startBalance;
     address owner = msg.sender;
     address beneficiary;
-    uint256 expiration = block.timestamp + 10 * 365 days;
+    uint256 expiration = now + 10 years;
 
-    constructor(address player) public payable {
-        require(msg.sender != player);
+    function RetirementFundChallenge(address player) public payable {
         require(msg.value == 1 ether);
 
         beneficiary = player;

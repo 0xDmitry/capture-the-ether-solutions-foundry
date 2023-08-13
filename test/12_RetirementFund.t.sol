@@ -1,18 +1,23 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
 import { Test } from "forge-std/Test.sol";
-import { RetirementFundChallenge } from "../src/challenges/12_RetirementFund/RetirementFundChallenge.sol";
 import { RetirementFundChallengeFactory } from "../src/challenges/12_RetirementFund/RetirementFundChallengeFactory.sol";
 import { RetirementFundAttack } from "../src/attacks/RetirementFundAttack.sol";
 
+interface IRetirementFundChallenge {
+    function isComplete() external returns (bool);
+
+    function collectPenalty() external;
+}
+
 contract RetirementFundTest is Test {
-    RetirementFundChallenge public challenge;
+    IRetirementFundChallenge public challenge;
 
     function setUp() public {
         RetirementFundChallengeFactory factory = new RetirementFundChallengeFactory();
-        challenge = factory.createChallenge{ value: 1 ether }(address(this));
+        address challengeAddress = factory.createChallenge{ value: 1 ether }(address(this));
+        challenge = IRetirementFundChallenge(challengeAddress);
     }
 
     function test() public {

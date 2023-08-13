@@ -1,12 +1,10 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.4.21;
 
 contract TokenSaleChallenge {
     mapping(address => uint256) public balanceOf;
     uint256 constant PRICE_PER_TOKEN = 1 ether;
 
-    constructor() public payable {
+    function TokenSaleChallenge(address _player) public payable {
         require(msg.value == 1 ether);
     }
 

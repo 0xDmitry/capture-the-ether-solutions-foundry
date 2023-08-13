@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
-import { CallMeChallenge } from "./CallMeChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract CallMeChallengeFactory {
-    function createChallenge() external returns (CallMeChallenge) {
-        return new CallMeChallenge();
+contract CallMeChallengeFactory is StdCheats {
+    function createChallenge() external returns (address) {
+        return deployCode("CallMeChallenge.sol:CallMeChallenge");
     }
 }

@@ -1,17 +1,22 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
 import { Test } from "forge-std/Test.sol";
-import { CallMeChallenge } from "../src/challenges/02_CallMe/CallMeChallenge.sol";
 import { CallMeChallengeFactory } from "../src/challenges/02_CallMe/CallMeChallengeFactory.sol";
 
+interface ICallMeChallenge {
+    function isComplete() external returns (bool);
+
+    function callme() external;
+}
+
 contract CallMeTest is Test {
-    CallMeChallenge public challenge;
+    ICallMeChallenge public challenge;
 
     function setUp() public {
         CallMeChallengeFactory factory = new CallMeChallengeFactory();
-        challenge = factory.createChallenge();
+        address challengeAddress = factory.createChallenge();
+        challenge = ICallMeChallenge(challengeAddress);
     }
 
     function test() public {

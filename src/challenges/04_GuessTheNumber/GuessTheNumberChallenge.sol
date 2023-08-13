@@ -1,11 +1,9 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.4.21;
 
 contract GuessTheNumberChallenge {
     uint8 answer = 42;
 
-    constructor() public payable {
+    function GuessTheNumberChallenge() public payable {
         require(msg.value == 1 ether);
     }
 
@@ -17,7 +15,7 @@ contract GuessTheNumberChallenge {
         require(msg.value == 1 ether);
 
         if (n == answer) {
-            payable(msg.sender).transfer(2 ether);
+            msg.sender.transfer(2 ether);
         }
     }
 }

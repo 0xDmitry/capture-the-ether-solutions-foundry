@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
-import { GuessTheRandomNumberChallenge } from "./GuessTheRandomNumberChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract GuessTheRandomNumberChallengeFactory {
-    function createChallenge() external payable returns (GuessTheRandomNumberChallenge) {
-        return new GuessTheRandomNumberChallenge{ value: msg.value }();
+contract GuessTheRandomNumberChallengeFactory is StdCheats {
+    function createChallenge() external payable returns (address) {
+        return
+            deployCode(
+                "GuessTheRandomNumberChallenge.sol:GuessTheRandomNumberChallenge",
+                msg.value
+            );
     }
 }

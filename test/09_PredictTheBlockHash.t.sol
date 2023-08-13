@@ -1,17 +1,24 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
 import { Test } from "forge-std/Test.sol";
-import { PredictTheBlockHashChallenge } from "../src/challenges/09_PredictTheBlockHash/PredictTheBlockHashChallenge.sol";
 import { PredictTheBlockHashChallengeFactory } from "../src/challenges/09_PredictTheBlockHash/PredictTheBlockHashChallengeFactory.sol";
 
+interface IPredictTheBlockHashChallenge {
+    function isComplete() external returns (bool);
+
+    function lockInGuess(bytes32 hash) external payable;
+
+    function settle() external;
+}
+
 contract PredictTheBlockHashTest is Test {
-    PredictTheBlockHashChallenge public challenge;
+    IPredictTheBlockHashChallenge public challenge;
 
     function setUp() public {
         PredictTheBlockHashChallengeFactory factory = new PredictTheBlockHashChallengeFactory();
-        challenge = factory.createChallenge{ value: 1 ether }();
+        address challengeAddress = factory.createChallenge{ value: 1 ether }();
+        challenge = IPredictTheBlockHashChallenge(challengeAddress);
     }
 
     function test() public {

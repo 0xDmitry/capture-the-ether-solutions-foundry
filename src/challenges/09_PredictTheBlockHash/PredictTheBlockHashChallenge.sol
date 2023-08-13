@@ -1,13 +1,11 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.4.21;
 
 contract PredictTheBlockHashChallenge {
     address guesser;
     bytes32 guess;
     uint256 settlementBlockNumber;
 
-    constructor() public payable {
+    function PredictTheBlockHashChallenge() public payable {
         require(msg.value == 1 ether);
     }
 
@@ -16,7 +14,7 @@ contract PredictTheBlockHashChallenge {
     }
 
     function lockInGuess(bytes32 hash) public payable {
-        require(guesser == address(0));
+        require(guesser == 0);
         require(msg.value == 1 ether);
 
         guesser = msg.sender;
@@ -28,11 +26,11 @@ contract PredictTheBlockHashChallenge {
         require(msg.sender == guesser);
         require(block.number > settlementBlockNumber);
 
-        bytes32 answer = blockhash(settlementBlockNumber);
+        bytes32 answer = block.blockhash(settlementBlockNumber);
 
-        guesser = address(0);
+        guesser = 0;
         if (guess == answer) {
-            payable(msg.sender).transfer(2 ether);
+            msg.sender.transfer(2 ether);
         }
     }
 }

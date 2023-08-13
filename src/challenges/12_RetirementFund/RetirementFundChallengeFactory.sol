@@ -1,11 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
-import { RetirementFundChallenge } from "./RetirementFundChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract RetirementFundChallengeFactory {
-    function createChallenge(address player) external payable returns (RetirementFundChallenge) {
-        return new RetirementFundChallenge{ value: msg.value }(player);
+contract RetirementFundChallengeFactory is StdCheats {
+    function createChallenge(address player) external payable returns (address) {
+        return
+            deployCode(
+                "RetirementFundChallenge.sol:RetirementFundChallenge",
+                abi.encode(player),
+                msg.value
+            );
     }
 }

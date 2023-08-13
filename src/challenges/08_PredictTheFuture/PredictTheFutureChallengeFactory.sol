@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
-import { PredictTheFutureChallenge } from "./PredictTheFutureChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract PredictTheFutureChallengeFactory {
-    function createChallenge() external payable returns (PredictTheFutureChallenge) {
-        return new PredictTheFutureChallenge{ value: msg.value }();
+contract PredictTheFutureChallengeFactory is StdCheats {
+    function createChallenge() external payable returns (address) {
+        return deployCode("PredictTheFutureChallenge.sol:PredictTheFutureChallenge", msg.value);
     }
 }

@@ -1,17 +1,22 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
 import { Test } from "forge-std/Test.sol";
-import { GuessTheNumberChallenge } from "../src/challenges/04_GuessTheNumber/GuessTheNumberChallenge.sol";
 import { GuessTheNumberChallengeFactory } from "../src/challenges/04_GuessTheNumber/GuessTheNumberChallengeFactory.sol";
 
+interface IGuessTheNumberChallenge {
+    function isComplete() external returns (bool);
+
+    function guess(uint8 n) external payable;
+}
+
 contract GuessTheNumberTest is Test {
-    GuessTheNumberChallenge public challenge;
+    IGuessTheNumberChallenge public challenge;
 
     function setUp() public {
         GuessTheNumberChallengeFactory factory = new GuessTheNumberChallengeFactory();
-        challenge = factory.createChallenge{ value: 1 ether }();
+        address challengeAddress = factory.createChallenge{ value: 1 ether }();
+        challenge = IGuessTheNumberChallenge(challengeAddress);
     }
 
     function test() public {

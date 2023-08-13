@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
-import { PredictTheBlockHashChallenge } from "./PredictTheBlockHashChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract PredictTheBlockHashChallengeFactory {
-    function createChallenge() external payable returns (PredictTheBlockHashChallenge) {
-        return new PredictTheBlockHashChallenge{ value: msg.value }();
+contract PredictTheBlockHashChallengeFactory is StdCheats {
+    function createChallenge() external payable returns (address) {
+        return
+            deployCode("PredictTheBlockHashChallenge.sol:PredictTheBlockHashChallenge", msg.value);
     }
 }

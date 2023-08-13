@@ -1,9 +1,10 @@
-pragma solidity ^0.4.21;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-import { MappingChallenge } from "./MappingChallenge.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-contract MappingChallengeFactory {
+contract MappingChallengeFactory is StdCheats {
     function createChallenge() external returns (address) {
-        return new MappingChallenge();
+        return deployCode("MappingChallenge.sol:MappingChallenge");
     }
 }

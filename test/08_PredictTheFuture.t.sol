@@ -1,17 +1,24 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
 import { Test } from "forge-std/Test.sol";
-import { PredictTheFutureChallenge } from "../src/challenges/08_PredictTheFuture/PredictTheFutureChallenge.sol";
 import { PredictTheFutureChallengeFactory } from "../src/challenges/08_PredictTheFuture/PredictTheFutureChallengeFactory.sol";
 
+interface IPredictTheFutureChallenge {
+    function isComplete() external returns (bool);
+
+    function lockInGuess(uint8 n) external payable;
+
+    function settle() external;
+}
+
 contract PredictTheFutureTest is Test {
-    PredictTheFutureChallenge public challenge;
+    IPredictTheFutureChallenge public challenge;
 
     function setUp() public {
         PredictTheFutureChallengeFactory factory = new PredictTheFutureChallengeFactory();
-        challenge = factory.createChallenge{ value: 1 ether }();
+        address challengeAddress = factory.createChallenge{ value: 1 ether }();
+        challenge = IPredictTheFutureChallenge(challengeAddress);
     }
 
     function test() public {

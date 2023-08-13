@@ -1,17 +1,24 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
 import { Test } from "forge-std/Test.sol";
-import { TokenSaleChallenge } from "../src/challenges/10_TokenSale/TokenSaleChallenge.sol";
 import { TokenSaleChallengeFactory } from "../src/challenges/10_TokenSale/TokenSaleChallengeFactory.sol";
 
+interface ITokenSaleChallenge {
+    function isComplete() external returns (bool);
+
+    function buy(uint256 numTokens) external payable;
+
+    function sell(uint256 numTokens) external;
+}
+
 contract TokenSaleTest is Test {
-    TokenSaleChallenge public challenge;
+    ITokenSaleChallenge public challenge;
 
     function setUp() public {
         TokenSaleChallengeFactory factory = new TokenSaleChallengeFactory();
-        challenge = factory.createChallenge{ value: 1 ether }();
+        address challengeAddress = factory.createChallenge{ value: 1 ether }();
+        challenge = ITokenSaleChallenge(challengeAddress);
     }
 
     function test() public {

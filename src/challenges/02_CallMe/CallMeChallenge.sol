@@ -1,6 +1,4 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.2;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.4.21;
 
 contract CallMeChallenge {
     bool public isComplete = false;
