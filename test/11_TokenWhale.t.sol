@@ -14,7 +14,7 @@ interface ITokenWhaleChallenge {
 }
 
 contract TokenWhaleTest is Test {
-    ITokenWhaleChallenge public challenge;
+    ITokenWhaleChallenge challenge;
 
     function setUp() public {
         TokenWhaleChallengeFactory factory = new TokenWhaleChallengeFactory();

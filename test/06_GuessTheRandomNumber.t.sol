@@ -11,9 +11,9 @@ interface IGuessTheRandomNumberChallenge {
 }
 
 contract GuessTheRandomNumberTest is Test {
-    IGuessTheRandomNumberChallenge public challenge;
-    uint256 public blockNumber;
-    uint256 public blockTimestamp;
+    IGuessTheRandomNumberChallenge challenge;
+    uint256 blockNumber;
+    uint256 blockTimestamp;
 
     function setUp() public {
         GuessTheRandomNumberChallengeFactory factory = new GuessTheRandomNumberChallengeFactory();

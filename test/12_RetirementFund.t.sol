@@ -12,7 +12,7 @@ interface IRetirementFundChallenge {
 }
 
 contract RetirementFundTest is Test {
-    IRetirementFundChallenge public challenge;
+    IRetirementFundChallenge challenge;
 
     function setUp() public {
         RetirementFundChallengeFactory factory = new RetirementFundChallengeFactory();

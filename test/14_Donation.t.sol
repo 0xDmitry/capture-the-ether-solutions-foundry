@@ -13,7 +13,7 @@ interface IDonationChallenge {
 }
 
 contract DonationTest is Test {
-    IDonationChallenge public challenge;
+    IDonationChallenge challenge;
 
     function setUp() public {
         DonationChallengeFactory factory = new DonationChallengeFactory();

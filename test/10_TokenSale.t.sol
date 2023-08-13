@@ -13,7 +13,7 @@ interface ITokenSaleChallenge {
 }
 
 contract TokenSaleTest is Test {
-    ITokenSaleChallenge public challenge;
+    ITokenSaleChallenge challenge;
 
     function setUp() public {
         TokenSaleChallengeFactory factory = new TokenSaleChallengeFactory();

@@ -11,7 +11,7 @@ interface IGuessTheNumberChallenge {
 }
 
 contract GuessTheNumberTest is Test {
-    IGuessTheNumberChallenge public challenge;
+    IGuessTheNumberChallenge challenge;
 
     function setUp() public {
         GuessTheNumberChallengeFactory factory = new GuessTheNumberChallengeFactory();

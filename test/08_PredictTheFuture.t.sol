@@ -13,7 +13,7 @@ interface IPredictTheFutureChallenge {
 }
 
 contract PredictTheFutureTest is Test {
-    IPredictTheFutureChallenge public challenge;
+    IPredictTheFutureChallenge challenge;
 
     function setUp() public {
         PredictTheFutureChallengeFactory factory = new PredictTheFutureChallengeFactory();

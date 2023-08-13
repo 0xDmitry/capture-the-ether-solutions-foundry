@@ -11,7 +11,7 @@ interface INicknameChallenge {
 }
 
 contract NicknameTest is Test {
-    INicknameChallenge public challenge;
+    INicknameChallenge challenge;
 
     function setUp() public {
         NicknameChallengeFactory factory = new NicknameChallengeFactory();

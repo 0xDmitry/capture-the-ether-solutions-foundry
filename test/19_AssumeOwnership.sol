@@ -13,7 +13,7 @@ interface IAssumeOwnershipChallenge {
 }
 
 contract AssumeOwnershipTest is Test {
-    IAssumeOwnershipChallenge public challenge;
+    IAssumeOwnershipChallenge challenge;
 
     function setUp() public {
         AssumeOwnershipChallengeFactory factory = new AssumeOwnershipChallengeFactory();

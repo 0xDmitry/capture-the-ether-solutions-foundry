@@ -11,7 +11,7 @@ interface ICallMeChallenge {
 }
 
 contract CallMeTest is Test {
-    ICallMeChallenge public challenge;
+    ICallMeChallenge challenge;
 
     function setUp() public {
         CallMeChallengeFactory factory = new CallMeChallengeFactory();

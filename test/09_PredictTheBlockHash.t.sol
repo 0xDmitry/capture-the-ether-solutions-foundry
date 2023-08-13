@@ -13,7 +13,7 @@ interface IPredictTheBlockHashChallenge {
 }
 
 contract PredictTheBlockHashTest is Test {
-    IPredictTheBlockHashChallenge public challenge;
+    IPredictTheBlockHashChallenge challenge;
 
     function setUp() public {
         PredictTheBlockHashChallengeFactory factory = new PredictTheBlockHashChallengeFactory();

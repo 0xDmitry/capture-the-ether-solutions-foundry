@@ -9,7 +9,7 @@ interface IDeployChallenge {
 }
 
 contract DeployTest is Test {
-    IDeployChallenge public challenge;
+    IDeployChallenge challenge;
 
     function setUp() public {
         DeployChallengeFactory factory = new DeployChallengeFactory();

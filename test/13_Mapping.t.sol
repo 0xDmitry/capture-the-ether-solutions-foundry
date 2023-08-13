@@ -13,7 +13,7 @@ interface IMappingAttack {
 }
 
 contract MappingTest is Test {
-    IMappingChallenge public challenge;
+    IMappingChallenge challenge;
 
     function setUp() public {
         MappingChallengeFactory factory = new MappingChallengeFactory();
